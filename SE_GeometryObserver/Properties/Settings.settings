@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SE_GeometryObserver.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Title" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Сравнение геометрий</Value>
+    </Setting>
+    <Setting Name="AR_BUTTON_NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Сравнение геометрий</Value>
+    </Setting>
+    <Setting Name="AR_BUTTON_TEXT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Сравнение геометрий</Value>
+    </Setting>
+    <Setting Name="AR_BUTTON_TOOLTIP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Сравнение геометрий</Value>
+    </Setting>
+    <Setting Name="AR_RIBBON_PANEL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Общие</Value>
+    </Setting>
+    <Setting Name="AR_RIBBON_TAB" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">СтройЭксперт</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,83 @@
+﻿<Window x:Class="SE_GeometryObserver.Views.GeometryViewerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE_GeometryObserver.Views" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        xmlns:local1="clr-namespace:SE_GeometryObserver.Models.Converters"
+        mc:Ignorable="d"
+        Title="GeometryViewerView" Height="800" Width="600">
+    <Window.Resources>
+        <local1:EnumToDisplayStringConverter x:Key="EnumToDisplayStringConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="0.05*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MaxHeight="50"></RowDefinition>
+                <RowDefinition Height="*" MaxHeight="50"></RowDefinition>
+                <RowDefinition Height="*" MaxHeight="150"></RowDefinition>
+                <RowDefinition Height="*" MaxHeight="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Текущий документ:" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Документ для сравнения:" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" 
+                       Text="{Binding CurrentDocName, UpdateSourceTrigger=PropertyChanged}" 
+                       HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="{Binding FileDocName, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Категории:" TextAlignment="Left"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1"
+                       Text="{Binding CategoriesDesccription, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="8"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Изолировать" TextAlignment="Left"></TextBlock>
+            <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding IsIsolateIntersection, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+        </Grid>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  CanUserResizeRows="False"
+                  ItemsSource="{Binding GeometryCompareResults, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                  CanUserSortColumns="False"
+                  HeadersVisibility="Column"
+                  x:Name="results">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction CommandParameter="{Binding ElementName=results, Path=SelectedItems}" Command="{Binding SelectItemsCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" 
+                                    Width="0.5*" Header="№" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" 
+                                    Width="*" Header="Имя" Binding="{Binding CurrentElementName}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" 
+                                    Width="*" Header="Id" Binding="{Binding CurrentElementId}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" 
+                                    Width="*" Header="Имя (из файла)" Binding="{Binding FileElementName}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" 
+                                    Width="*" Header="Id (из файла)" Binding="{Binding FileElementId}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" 
+                                    Width="*" Header="Результат" Binding="{Binding CompareResult, Converter= {StaticResource EnumToDisplayStringConverter}}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="2" HorizontalAlignment="Right" 
+                MinWidth="100" MaxWidth="100" Content="Сохранить" Command="{Binding SaveCompareResultsCommand}"></Button>
+    </Grid>
+</Window>

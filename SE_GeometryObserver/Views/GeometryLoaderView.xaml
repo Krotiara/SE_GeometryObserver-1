@@ -1,0 +1,93 @@
+﻿<Window x:Class="SE_GeometryObserver.Views.GeometryLoaderView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE_GeometryObserver.Views"
+        mc:Ignorable="d"
+        Title="GeometryLoader" Height="450" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" MaxHeight="80"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.1*" MaxHeight="80"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*" MaxWidth="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" 
+                       Grid.Column="0" 
+                       Text="Путь до файла сравнения:" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Row="1" 
+                       Grid.Column="0" 
+                       Text="{Binding ComparisonFilePath, UpdateSourceTrigger=PropertyChanged}"
+                       VerticalAlignment="Center"></TextBlock>
+            <Button Grid.Row ="0" 
+                    Grid.RowSpan="2" 
+                    Grid.Column="1" 
+                    Content="Выбрать" 
+                    Command="{Binding SelectComparisonFile}"></Button>
+        </Grid>
+
+        <DataGrid x:Name="categories" 
+                  Grid.Row="1" 
+                  ItemsSource="{Binding SelectableCategories, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="False"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Категория" Width="*" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="0.1*" MinWidth="20" MaxWidth="20">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="selectCaltegory" 
+                                      IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            </CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                    Grid.Column="0"
+                    Command="{Binding SetSelectAll}" 
+                    CommandParameter = "true"
+                    Content="Выбрать всё" HorizontalAlignment="Left"
+                    MinWidth="100"></Button>
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding SetSelectAll}" 
+                    CommandParameter = "false"
+                    Content="Очистить всё" HorizontalAlignment="Left"
+                    MinWidth="100"></Button>
+                <Button
+                    Grid.Column="3"
+                    x:Name="apply" 
+                    Command="{Binding CompareGeometry}" 
+                    Content="Сравнить" HorizontalAlignment="Right"
+                    MinWidth="100"></Button>
+            <Button
+                    Grid.Column="4"
+                    x:Name="show" 
+                    Command="{Binding ShowCurrentCompareResults}" 
+                    Content="Показать" HorizontalAlignment="Right"
+                    MinWidth="100"></Button>
+        </Grid>
+    </Grid>
+</Window>

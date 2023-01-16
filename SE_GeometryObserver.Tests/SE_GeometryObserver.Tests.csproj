@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="speckle.xunit.runner.wpf" Version="1.0.9" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xUnitRevitUtils.2021" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SE_GeometryObserver.Entities\SE_GeometryObserver.Entities.csproj" />
+    <ProjectReference Include="..\SE_GeometryObserver.Service\SE_GeometryObserver.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="SE_GeometryObserver">
+      <HintPath>..\SE_GeometryObserver\bin\Debug\net48\SE_GeometryObserver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\SingleRootDoc.rvt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

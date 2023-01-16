@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Сравнение геометрий</Name>
+    <Assembly>StroyExp/SE_GeometryObserver/SE_GeometryObserver.dll</Assembly>
+    <FullClassName>AppNamespace.App</FullClassName>
+    <ClientId>874b599e-7d89-4b82-affa-5979b011b47e</ClientId>
+    <VendorId>lisovenko@item-pro.ru</VendorId>
+    <VendorDescription>ru.item-pro.lisovenko</VendorDescription>
+  </AddIn>
+</RevitAddIns>
